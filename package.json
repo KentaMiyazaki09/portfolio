@@ -1,0 +1,38 @@
+{
+  "name": "local",
+  "version": "1.0.0",
+  "description": "frontend development environment",
+  "main": "gulpfile.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=development gulp start",
+    "build": "NODE_ENV=production gulp build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.24.3",
+    "@babel/preset-env": "^7.24.3",
+    "babel-loader": "^9.1.3",
+    "browser-sync": "^2.27.7",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-ejs": "^5.1.0",
+    "gulp-filter": "^9.0.1",
+    "gulp-imagemin": "^9.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "path": "^0.12.7",
+    "sass": "^1.49.9",
+    "terser-webpack-plugin": "^5.3.10",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^5.91.0",
+    "webpack-stream": "^7.0.0"
+  },
+  "dependencies": {
+    "lil-gui": "^0.20.0",
+    "three": "^0.170.0"
+  }
+}
