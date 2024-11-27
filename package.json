@@ -32,7 +32,6 @@
     "webpack-stream": "^7.0.0"
   },
   "dependencies": {
-    "lil-gui": "^0.20.0",
     "three": "^0.170.0"
   }
 }

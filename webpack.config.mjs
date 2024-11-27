@@ -5,7 +5,7 @@ const ENV = process.env.NODE_ENV
 
 export default {
   mode: ENV,
-  devtool: ENV === 'production' ? 'source-map' : undefined,
+  devtool: ENV === 'development' ? 'source-map' : undefined,
   output: {
     filename: '[name].js', // [name] gulpで設定
   },
@@ -36,7 +36,7 @@ export default {
         extractComments: false,
         terserOptions: {
           compress: {
-            drop_console: ENV === 'production' ? true : false,
+            drop_console: ENV === 'production' || false,
           }
         },
       })

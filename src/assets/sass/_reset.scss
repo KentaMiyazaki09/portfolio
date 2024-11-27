@@ -10,6 +10,12 @@
     word-break: normal;
     -moz-tab-size: 4;
     tab-size: 4;
+    font-family: "Helvetica Neue",
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif;
   }
   
   *,
@@ -47,10 +53,6 @@
   
   summary {
     display: list-item; /* Add the correct display in all browsers */
-  }
-  
-  small {
-    font-size: 80%; /* Set font-size to 80% in `small` elements */
   }
   
   [hidden] {
@@ -282,4 +284,36 @@
 
 ol, ul, li {
   list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, ul, var, video {
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  color: inherit;
+}
+
+img {
+  width: 100%;
+}
+
+svg { // safariで見切れる可能性があるため
+  overflow: hidden;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: normal;
+}
+
+*:focus {
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

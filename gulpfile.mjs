@@ -10,13 +10,12 @@ const gulpSass = pureGulpSass(sass)
 import gulpAutoprefixer from 'gulp-autoprefixer'
 import gulpPlumber from 'gulp-plumber'
 import pureGulpFilter from 'gulp-filter'
-import gulpImagemin, { gifsicle, mozjpeg, optipng, svgo } from 'gulp-imagemin'
 
 import fs from 'fs'
 import path from 'path'
 
 import browserSync from 'browser-sync'
-const reload = browserSync.reload
+const bs = browserSync.create()
 
 import webpack from 'webpack'
 import pureVinylNamed from 'vinyl-named'
@@ -27,14 +26,14 @@ const srcPath = {
   html: './src/**/*.ejs',
   sass: './src/assets/sass/**/*.scss',
   js: './src/assets/js/**/*.js',
-  images: 'src/assets/images/**/*'
+  images: 'src/assets/img/**/*'
 }
 
 const destPath = {
   html: './dist',
   sass: './dist/assets/css/',
   js: './dist/assets/js/',
-  images: 'dist/assets/images/'
+  images: 'dist/assets/img/'
 }
 
 const gulpFilter = () => pureGulpFilter(({ path, relative }) => !/\/_/.test(path) && !/^_/.test(relative))
@@ -63,6 +62,7 @@ const compileSass = () => {
     .pipe(gulpSass().on('error', gulpSass.logError))
     .pipe(gulpAutoprefixer())
     .pipe(dest(destPath.sass, { sourcemaps: '.' }))
+    .pipe(bs.stream())
 }
 
 const buildSass = () => {
@@ -90,48 +90,43 @@ const compireJS = () => {
  * 画像の圧縮 svg, jpeg, png, gifは圧縮
  * webpはコピーだけ
  */
-const minifyImages = ()  => {
-  return src(srcPath.images)
-    // .pipe(gulpImagemin([
-    //   gifsicle({interlaced: true}),
-    //   mozjpeg({quality: 80, progressive: true}),
-    //   optipng({optimizationLevel: 3}),
-    //   svgo({
-    //     plugins: [
-    //       { name: 'removeViewBox', active: true },
-    //       { name: 'cleanupIDs',active: false }
-    //     ]
-    //   })
-    // ]))
-    .pipe(dest(destPath.images))
+const copyImages = ()  => {
+  return src(srcPath.images).pipe(dest(destPath.images))
 }
 
 /** ローカルサーバー */
-const buildServer = (done) => {
-  browserSync.init({
+const syncServer = (done) => {
+  bs.init({
     server: {
       baseDir: './dist'
-    }
+    },
+    files: './dist/**/*',
   })
   done()
 }
 
 /** ファイル監視 */
 const watchFiles = (done) => {
-  watch(srcPath.html, { ignoreInitial: false }, compileEjs).on('change', reload)
-  watch(srcPath.sass, { ignoreInitial: false }, compileSass).on('change', reload)
-  watch(srcPath.js, {ignoreInitial: false }, compireJS).on('change', reload)
-  watch(srcPath.images, {ignoreInitial: false }, minifyImages)
+  watch(srcPath.html, { ignoreInitial: false }, compileEjs)
+  watch(srcPath.sass, { ignoreInitial: false }, compileSass)
+  watch(srcPath.js, {ignoreInitial: false }, compireJS)
+  watch(srcPath.images, {ignoreInitial: false }, copyImages)
   done()
 }
 
-/** ファイル削除 */
-const deleteFiles = async(done) => {
-  await fs.rm('./dist', { recursive: true }, () => console.log('distを削除しました'))
+const deleteFiles = async() => await fs.promises.rm('./dist', { recursive: true, force: true })
+
+/** ファイル削除とbuild */
+const buildFiles = async(done) => {
+  await deleteFiles()
+  copyImages()
+  buildSass()
+  compileEjs()
+  compireJS()
   done()
 }
 
 /** gulp start・build */
-const start = series(buildServer, watchFiles)
-const build = series(deleteFiles, minifyImages, compileEjs, buildSass, compireJS)
+const start = series(syncServer, watchFiles)
+const build = series(buildFiles)
 export { start, build }

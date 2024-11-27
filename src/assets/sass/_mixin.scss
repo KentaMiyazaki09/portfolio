@@ -1,3 +1,5 @@
+@use './variables' as v;
+
 // pcサイズ
 @mixin pc {
   @media screen and (min-width: 769px) {
@@ -5,9 +7,27 @@
   }
 }
 
-// スマホサイズ
+// spサイズ
 @mixin sp {
   @media screen and (max-width: 768px) {
     @content;
+  }
+}
+
+// font size
+@function get_vw($size, $viewport: 375) {
+  $rate: calc(100 / $viewport);
+  $calc: round($rate * $size * 1vw * 10);
+  $calc2: calc($calc / 10);
+  @return $calc2;
+}
+@mixin fz_vw($font_size) {
+  @include sp {
+    font-size: $font_size * 1px;
+    font-size: get_vw($font_size);
+  }
+  @include pc {
+    font-size: $font_size * 1px;
+    font-size: get_vw($font_size, v.$pcMaxWidth);
   }
 }

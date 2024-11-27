@@ -1,88 +1,26 @@
 @use './_reset';
-@use './_mixin';
+@use './_base';
 
-// modeuls
-@use './_modules/_test';
+@use './mixin' as m;
 
 body {
-  margin: 0;
+  background-color: #333;
 }
-#bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-#percent {
-  top: 40px;
-  color: red;
+
+.header {
   z-index: 999;
   position: fixed;
-  top: 10px;
-  left: 10px;
-  font-size: 30px;
-}
-
-.main {
-  width: 100%;
-}
-
-$margin: 20%;
-$size: 60;
-.box {
-  position: sticky;
-  top: $margin;
-  left: $margin;
-  width: #{$size}+'%';
-  height: #{$size}vh;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  &__inner {
-    text-align: center;
-    padding: 5%;
-  }
-}
-.title {
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 3%;
-}
-
-.content {
-  height: 5000px;
-  width: 100%;
-  padding: 10% 0;
-  position: relative;
-  font-size: 30px;
-  font-weight: bold;
+  top: 5%;
+  left: 4%;
   color: #fff;
-  &--0 {
-    .box {
-      background: rgba(255, 136, 0, 0.5);
-    }
-  }
-  &--1 {
-    padding-top: 0%;
-    .box {
-      background: rgba(233, 116, 70, 0.5);
-    }
-  }
-  &--2 {
-    .box {
-      background: rgba(0, 255, 0, 0.5);
-    }
-  }
-  &--3 {
-    .box {
-      background: rgba(15, 224, 224, 0.5);
-    }
-  }
-  &--4 {
-    height: 100vh;
-    padding-bottom: 0%;
-    background: rgba(194, 157, 225, 0.5);
-  }
+  @include m.fz_vw(30);
+}
+
+.wrapper {
+  height: 100vh;
+}
+
+.mv {
+  width: 100%;
+  height: 100%;
 }

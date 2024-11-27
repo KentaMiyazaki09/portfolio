@@ -1,48 +1,22 @@
-<%- include('./_modules/_header.ejs', {
-  title: 'my portfolio'
-}) %>
-  <div class="main">
-    <div id="score">
-      <p id="percent">0</p>
-    </div>
+<%- include('./_modules/_header.ejs') %>
 
-    <canvas id="bg"></canvas>
+<div class="wrapper">
 
-    <div class="content content--0">
-      <div class="box">
-        <h1 class="title">k.miyazaki</h1>
-      </div>
-    </div>
-    <div class="content content--1">
-      <div class="box">
-        <div class="box__inner">
-          <h2 class="title">SKILL</h2>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum libero nostrum, laboriosam cumque ipsam et reiciendis modi veniam dicta? Soluta illum alias accusamus tenetur aut obcaecati consectetur eligendi voluptas fugiat?</p>
-        </div>
-      </div>
-    </div>
-    <section class="content content--2">
-      <div class="box">
-        <div class="box__inner">
-          <h2 class="title">WORKS 01</h2>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum libero nostrum, laboriosam cumque ipsam et reiciendis modi veniam dicta? Soluta illum alias accusamus tenetur aut obcaecati consectetur eligendi voluptas fugiat?</p>
-        </div>
-      </div>
-    </section>
-    <section class="content content--3">
-      <div class="box">
-        <div class="box__inner">
-          <h2 class="title">WORKS 02</h2>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum libero nostrum, laboriosam cumque ipsam et reiciendis modi veniam dicta? Soluta illum alias accusamus tenetur aut obcaecati consectetur eligendi voluptas fugiat?</p>
-        </div>
-      </div>
-    </section>
-    <div class="content content--4">
-      <footer>
-        <p>SNS</p>
-      </footer>
-    </div>
+  <div class="mv">
+
+    <header class="header">
+      <h1>k.miyazaki<br>Portfolio</h1>
+    </header>
+    <canvas id="mv-gallery"></canvas>
   </div>
 
-  <script src="./assets/js/index.js"></script>
+  <!-- <div class="slider" id="mv-slider">
+    <div><img src="/assets/img/sample01.jpg" alt=""></div>
+    <div><img src="/assets/img/sample02.jpg" alt=""></div>
+  </div> -->
+
+</div>
+
+<script src="./assets/js/index.js"></script>
+
 <%- include('./_modules/_footer.ejs') %>

@@ -1,0 +1,6 @@
+@use './_mixin' as m;
+@use './variables' as v;
+
+body {
+  @include m.fz_vw(v.$basicFontSize);
+}
