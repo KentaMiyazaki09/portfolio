@@ -43,7 +43,7 @@ const render = () => {
 }
 const init = () => {
   scene = new THREE.Scene()
-  canvas = document.querySelector('#mv-gallery')
+  canvas = document.querySelector('#bg-canvas')
   renderer = new THREE.WebGLRenderer({
     canvas,
     antialias: true,
