@@ -1,28 +1,81 @@
 <%- include('./_modules/_header.ejs') %>
 
-<div class="wrapper">
+<%
+  const works = [
+    {
+      job: 'LP実装', name: 'LEPSIM 夏ビジュアル', url: 'https://www.dot-st.com/lepsim/cp/2024summer',
+    },
+    {
+      job: 'LP実装', name: 'nikoand ミニオンズコラボ LP', url: 'https://www.dot-st.com/nikoand/cp/202406product_zakka',
+    },
+    {
+      job: 'LP実装', name: 'ホラー映画コラボ LP', url: 'https://www.dot-st.com/nikoand/cp/2024horror',
+    },
+    {
+      job: 'LP実装 Canvasアニメーション', name: 'nikoand キン肉マンコラボLP', url: 'https://www.dot-st.com/nikoand/cp/202408product_zakka',
+    },
+    {
+      job: 'LP実装', name: 'nikoand 11ぴきのねこコラボ LP', url: 'https://www.dot-st.com/nikoand/cp/202409product_zakka',
+    },
+    {
+      job: 'LP実装', name: 'RAGEBLUE ノグリラーメン LP', url: 'https://www.dot-st.com/rageblue/cp/neoguri',
+    },
+    {
+      job: 'Wordpress', name: 'BEAMS CULTUARTリニューアル', url: 'https://www.beams.co.jp/special/beams_cultuart/',
+    },
+  ]
+%>
 
-  <div class="main">
-    <h1 class="title">k.miyazaki<br>Portfolio</h1>
-     <!-- <ul>
-    <li><a href="/">github</a></li>
-    <li><a href="/">zenn</a></li>
-    <li><a href="/">shareX</a></li>
-  </ul> -->
+<canvas id="bg-canvas"></canvas>
+
+<div class="main">
+
+  <div class="section">
+    <div class="mv">
+      <h1 class="mv__ttl">k.miyazaki<br>Portfolio</h1>
+    </div>
   </div>
 
-  <menu class="menu">
+  <section id="works" class="section">
+    <h2>WORKS</h2>
     <ul>
-      <li><button class="button">TOP</button></li>
-      <li><button class="button">WORKS</button></li>
-      <li><button class="button">SKILL</button></li>
-      <li><button class="button">CONTACT</button></li>
+      <% works.forEach(({ url, name, job }) => { -%>
+      <li>
+        <a href="<%- url %>" target="_blank" rel="noopener noreferrer">
+          <h3><%- name %></h3>
+          <p><%- job %></p>
+        </a>
+      </li>
+      <% }); -%>
     </ul>
-  </menu>
+  </section>
 
- 
+  <section id="skill" class="section">
+    <h2>SKILL</h2>
+  </section>
 
-  <canvas id="bg-canvas"></canvas>
+  <section id="contact" class="section">
+    <h2>CONTACT</h2>
+  </section>
+
+  <section id="gallery">
+    <h2>GALLERY</h2>
+  </section>
+
+  <footer id="footer">
+    <p>SNS</p>
+    <ul>
+      <li>
+        <a href="https://github.com/KentaMiyazaki09" target="_blank" rel="noopener noreferrer">Github</a>
+      </li>
+      <li>
+        <a href="https://codepen.io/otsqpesk-the-builder" target="_blank" rel="noopener noreferrer">CodePen</a>
+      </li>
+      <li>
+        <a href="https://zenn.dev/nekoengineer" target="_blank" rel="noopener noreferrer">Zenn</a>
+      </li>
+    </ul>
+  </footer>
 
 </div>
 
