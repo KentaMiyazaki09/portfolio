@@ -5,8 +5,10 @@
   "main": "gulpfile.mjs",
   "type": "module",
   "scripts": {
-    "start": "cross-env NODE_ENV=development gulp start",
-    "build": "cross-env NODE_ENV=production gulp build"
+    "start": "NODE_ENV=development gulp start",
+    "start W": "cross-env NODE_ENV=development gulp start",
+    "build": "NODE_ENV=production gulp build",
+    "build W": "cross-env NODE_ENV=production gulp build"
   },
   "keywords": [],
   "author": "",

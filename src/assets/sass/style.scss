@@ -5,12 +5,13 @@
 
 body {
   background-color: #333;
-  overflow: hidden;
   @include m.font_fjalla;
   letter-spacing: 0.08em;
 }
 
 #bg-canvas {
+  z-index: 9;
+  pointer-events: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -38,14 +39,12 @@ body {
   top: 4vw;
   left: 2vw;
   width: 100%;
-  > ul {
-    display: flex;
-    justify-content: flex-start;
-    > li {
-      line-height: 1;
-      &:not(:last-child) {
-        margin-right: 5vw;
-      }
-    }
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__ttl {
+    @include m.fz_vw(30);
+    text-align: center;
   }
 }
