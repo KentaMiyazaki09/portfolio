@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "NODE_ENV=development gulp start",
-    "start W": "cross-env NODE_ENV=development gulp start",
+    "startW": "cross-env NODE_ENV=development gulp start",
     "build": "NODE_ENV=production gulp build",
-    "build W": "cross-env NODE_ENV=production gulp build"
+    "buildW": "cross-env NODE_ENV=production gulp build"
   },
   "keywords": [],
   "author": "",
