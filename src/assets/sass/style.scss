@@ -3,12 +3,6 @@
 
 @use './mixin' as m;
 
-body {
-  background-color: #333;
-  @include m.font_fjalla;
-  letter-spacing: 0.08em;
-}
-
 #bg-canvas {
   z-index: 9;
   pointer-events: none;
@@ -17,20 +11,14 @@ body {
   left: 0;
 }
 
-.main {
+.ttl {
   z-index: 999;
   position: fixed;
   top: 2%;
   left: 4%;
-}
-.mv {
   @include m.fz_vw(30);
   color: #fff;
   margin-bottom: 10%;
-}
-.button {
-  @include m.fz_vw(14);
-  color: #fff;
 }
 
 .menu {
@@ -46,5 +34,21 @@ body {
   &__ttl {
     @include m.fz_vw(30);
     text-align: center;
+  }
+}
+
+.section {
+  z-index: 999;
+  position: fixed;
+  top: 20%;
+  left: 2%;
+
+  opacity: 0;
+
+  &.is-active {
+    opacity: 1;
+  }
+
+  &--works {
   }
 }

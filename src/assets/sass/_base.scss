@@ -3,4 +3,8 @@
 
 body {
   @include m.fz_vw(v.$basicFontSize);
+  color: #fff;
+  background-color: #333;
+  @include m.font_fjalla;
+  letter-spacing: 0.08em;
 }

@@ -95,9 +95,29 @@ const createMesh = () => {
   scene.add(particles)
 }
 
-function changeContents(targetRot, targetName) {
-  const progress = Math.abs(Math.round(Math.cos(targetRot) * 100))
-  console.log(progress, targetName)
+const triggers = {
+  sec1: false,
+  sec2: false,
+  sec3: false,
+  sec4: false,
+}
+const triggerKeys = Object.keys(triggers)
+
+function setTrigger(rotationCos, rotationSin, targetName) {
+  const cos = Math.round(rotationCos * 100)
+  const sin = Math.round(rotationSin * 100)
+  
+  if (20 > cos && cos > -80 && 98 > sin && sin > 60 && !triggers[targetName]) {
+    for(const key of triggerKeys) {
+      if (key !== targetName) {
+        document.querySelector(`#${key}`).classList.remove('is-active')
+        triggers[key] = false
+      }
+    }
+
+    document.querySelector(`#${targetName}`).classList.add('is-active')
+    triggers[targetName] = true
+  }
 }
 
 let speed = 0
@@ -106,21 +126,32 @@ function rot() {
   rotation += speed
   speed *= 0.93
 
-  meshes[0].position.x = 2 + 3.8 * Math.cos(rotation)
-  meshes[0].position.z = -3 + 3.8 * Math.sin(rotation)
-  changeContents(rotation, 'about')
+  const rotationCos = Math.cos(rotation)
+  const rotationSin = Math.sin(rotation)
+  meshes[0].position.x = 2 + 3.8 * rotationCos
+  meshes[0].position.z = -3 + 3.8 * rotationSin
+  setTrigger(rotationCos, rotationSin, 'sec1')
 
   const rotation2 = rotation + Math.PI / 2
-  meshes[1].position.x = 2 + 3.8 * Math.cos(rotation2)
-  meshes[1].position.z = -3 + 3.8 * Math.sin(rotation2)
+  const rotation2Cos = Math.cos(rotation2)
+  const rotation2Sin = Math.sin(rotation2) 
+  meshes[1].position.x = 2 + 3.8 * rotation2Cos
+  meshes[1].position.z = -3 + 3.8 * rotation2Sin
+  setTrigger(rotation2Cos, rotation2Sin, 'sec2')
 
   const rotation3 = rotation + Math.PI
+  const rotation3Cos = Math.cos(rotation3)
+  const rotation3Sin = Math.sin(rotation3) 
   meshes[2].position.x = 2 + 3.8 * Math.cos(rotation3)
   meshes[2].position.z = -3 + 3.8 * Math.sin(rotation3)
+  setTrigger(rotation3Cos, rotation3Sin, 'sec3')
 
   const rotation4 = rotation + 3* (Math.PI / 2)
+  const rotation4Cos = Math.cos(rotation4)
+  const rotation4Sin = Math.sin(rotation4) 
   meshes[3].position.x = 2 + 3.8 * Math.cos(rotation4)
   meshes[3].position.z = -3 + 3.8 * Math.sin(rotation4)
+  setTrigger(rotation4Cos, rotation4Sin, 'sec4')
 
   window.requestAnimationFrame(rot)
 }
