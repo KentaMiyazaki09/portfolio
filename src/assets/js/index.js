@@ -25,9 +25,6 @@ const addLight = () => {
   directionalLight.position.set(0.5, 1, 0)
   scene.add(directionalLight)
 
-  // const lightHelper = new THREE.DirectionalLightHelper(directionalLight, 5)
-  // scene.add(lightHelper)
-
   const folderLight = gui.addFolder("Light")
   folderLight.open()
   folderLight.add(directionalLight.position, 'x', -1, 1, 0.01)
@@ -51,26 +48,6 @@ const addCamera = () => {
 /**
  * オブジェクト
  */
-const createBox = () => {
-  const geometry = new THREE.BoxGeometry(10, 8, 0.5)
-  const loader = new THREE.TextureLoader()
-  const texture = loader.load('assets/img/sample01.jpg')
-  texture.colorSpace = THREE.SRGBColorSpace
-  const material = [
-    new THREE.MeshBasicMaterial({ color: 'rgb(225, 157, 115)' }),
-    new THREE.MeshBasicMaterial({ color: 'rgb(225, 157, 115)' }),
-    new THREE.MeshBasicMaterial({ color: 'rgb(225, 157, 115)' }),
-    new THREE.MeshBasicMaterial({ color: 'rgb(225, 157, 115)' }),
-    new THREE.MeshBasicMaterial({map: texture}),
-    new THREE.MeshBasicMaterial({ color: 'rgb(225, 157, 115)' }),
-  ]
-  const box = new THREE.Mesh(geometry, material)
-  box.position.set(0, 0, -8)
-  box.rotation.set(0.4, -0.5, 0)
-
-  scene.add(box)
-}
-
 let meshes = []
 const createMesh = () => {
   const material = new THREE.MeshPhysicalMaterial({
@@ -118,29 +95,37 @@ const createMesh = () => {
   scene.add(particles)
 }
 
+function changeContents(targetRot, targetName) {
+  const progress = Math.abs(Math.round(Math.cos(targetRot) * 100))
+  console.log(progress, targetName)
+}
+
+let speed = 0
+let rotation = 0
 function rot() {
   rotation += speed
   speed *= 0.93
 
   meshes[0].position.x = 2 + 3.8 * Math.cos(rotation)
   meshes[0].position.z = -3 + 3.8 * Math.sin(rotation)
+  changeContents(rotation, 'about')
 
-  meshes[1].position.x = 2 + 3.8 * Math.cos(rotation + Math.PI / 2)
-  meshes[1].position.z = -3 + 3.8 * Math.sin(rotation + Math.PI / 2)
+  const rotation2 = rotation + Math.PI / 2
+  meshes[1].position.x = 2 + 3.8 * Math.cos(rotation2)
+  meshes[1].position.z = -3 + 3.8 * Math.sin(rotation2)
 
-  meshes[2].position.x = 2 + 3.8 * Math.cos(rotation + Math.PI)
-  meshes[2].position.z = -3 + 3.8 * Math.sin(rotation + Math.PI)
+  const rotation3 = rotation + Math.PI
+  meshes[2].position.x = 2 + 3.8 * Math.cos(rotation3)
+  meshes[2].position.z = -3 + 3.8 * Math.sin(rotation3)
 
-  meshes[3].position.x = 2 + 3.8 * Math.cos(rotation + 3* (Math.PI / 2))
-  meshes[3].position.z = -3 + 3.8 * Math.sin(rotation + 3* (Math.PI / 2))
+  const rotation4 = rotation + 3* (Math.PI / 2)
+  meshes[3].position.x = 2 + 3.8 * Math.cos(rotation4)
+  meshes[3].position.z = -3 + 3.8 * Math.sin(rotation4)
 
   window.requestAnimationFrame(rot)
 }
 
 // マウスフリックイベント
-let speed = 0
-let rotation = 0
-
 let startPoint = 0
 let endPoint = 0
 window.addEventListener('mousedown', (event) => {
@@ -193,14 +178,10 @@ const init = () => {
   addCamera()
   addLight()
 
-  // new OrbitControls(camera, canvas)
-
   // オブジェクトの追加
-  // createBox()
   createMesh()
 
   render()
-
 
   rot()
 }
