@@ -3,25 +3,25 @@
 <%
   const works = [
     {
-      job: 'LP実装', name: 'LEPSIM 夏ビジュアル', url: 'https://www.dot-st.com/lepsim/cp/2024summer',
+      name: 'グレンロイヤル', url: 'https://glenroyal.jp/',
     },
     {
-      job: 'LP実装', name: 'nikoand ミニオンズコラボ LP', url: 'https://www.dot-st.com/nikoand/cp/202406product_zakka',
+      name: 'キッズアティック', url: 'https://www.kids-attic.org/',
     },
     {
-      job: 'LP実装', name: 'ホラー映画コラボ LP', url: 'https://www.dot-st.com/nikoand/cp/2024horror',
+      name: '東京経済大学（MovableType7）', url: 'https://www.tku.ac.jp/',
     },
     {
-      job: 'LP実装 Canvasアニメーション', name: 'nikoand キン肉マンコラボLP', url: 'https://www.dot-st.com/nikoand/cp/202408product_zakka',
+      name: 'nikoand ミニオンズコラボ', url: 'https://www.dot-st.com/nikoand/cp/202406product_zakka',
     },
     {
-      job: 'LP実装', name: 'nikoand 11ぴきのねこコラボ LP', url: 'https://www.dot-st.com/nikoand/cp/202409product_zakka',
+      name: 'nikoand キン肉マンコラボ', url: 'https://www.dot-st.com/nikoand/cp/202408product_zakka',
     },
     {
-      job: 'LP実装', name: 'RAGEBLUE ノグリラーメン LP', url: 'https://www.dot-st.com/rageblue/cp/neoguri',
+      name: 'RAGEBLUE ノグリラーメン', url: 'https://www.dot-st.com/rageblue/cp/neoguri',
     },
     {
-      job: 'Wordpress', name: 'BEAMS CULTUARTリニューアル', url: 'https://www.beams.co.jp/special/beams_cultuart/',
+      name: 'BEAMS CULTUART（Wordpress）', url: 'https://www.beams.co.jp/special/beams_cultuart/',
     },
   ]
 %>
@@ -29,19 +29,17 @@
 <canvas id="bg-canvas"></canvas>
 
 <div class="main">
-
   <div class="ttl">
     <h1 class="ttl__text">k.miyazaki<br>Portfolio</h1>
   </div>
 
   <section id="sec1" class="section section--works">
-    <h2>WORKS</h2>
-    <ul>
-      <% works.forEach(({ url, name, job }) => { -%>
+    <h2 class="section-ttl">WORKS</h2>
+    <ul class="list">
+      <% works.forEach(({ url, name }) => { -%>
       <li>
         <a href="<%- url %>" target="_blank" rel="noopener noreferrer">
           <h3><%- name %></h3>
-          <p><%- job %></p>
         </a>
       </li>
       <% }); -%>
@@ -52,12 +50,19 @@
   </div>
 
   <section id="sec3" class="section section--skill">
-    <h2>SKILL</h2>
+    <h2 class="section-ttl">SKILL</h2>
+    <ul class="list">
+      <li>HTML, CSS</li>
+      <li>Javascript</li>
+      <li>WebGL, three.js</li>
+      <li>Wordpress, MovableType7</li>
+      <li>gulp, Webpack</li>
+    </ul>
   </section>
 
   <section id="sec4" class="section section--contact">
-    <h2>CONTACT</h2>
-    <ul>
+    <h2 class="section-ttl">CONTACT</h2>
+    <ul class="list">
       <li>
         <a href="https://github.com/KentaMiyazaki09" target="_blank" rel="noopener noreferrer">Github</a>
       </li>
@@ -69,6 +74,7 @@
       </li>
     </ul>
   </section>
+</main>
 
 <script src="./assets/js/index.js"></script>
 

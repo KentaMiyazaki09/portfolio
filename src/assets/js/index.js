@@ -6,6 +6,7 @@ import * as lil from 'lil-gui'
  * UIデバッグ
  */
 const gui = new lil.GUI()
+gui.close()
 
 /**
  * three
@@ -22,11 +23,10 @@ let scene, canvas, camera, renderer
  */
 const addLight = () => {
   const directionalLight = new THREE.DirectionalLight(0xffffff)
-  directionalLight.position.set(0.5, 1, 0)
+  directionalLight.position.set(0.53, 0.56, 0.68)
   scene.add(directionalLight)
 
   const folderLight = gui.addFolder("Light")
-  folderLight.open()
   folderLight.add(directionalLight.position, 'x', -1, 1, 0.01)
   folderLight.add(directionalLight.position, 'y', -1, 1, 0.01)
   folderLight.add(directionalLight.position, 'z', -1, 1, 0.01)
@@ -51,9 +51,9 @@ const addCamera = () => {
 let meshes = []
 const createMesh = () => {
   const material = new THREE.MeshPhysicalMaterial({
-    color: '#3c94d7',
-    metalness: 0.86,
-    roughness: 0.37,
+    color: '#1f80ff',
+    metalness: 0.67,
+    roughness: 0.43,
     flatShading: true,
   })
 
@@ -95,6 +95,7 @@ const createMesh = () => {
   scene.add(particles)
 }
 
+// オブジェクト回転のトリガー
 const triggers = {
   sec1: false,
   sec2: false,
@@ -102,7 +103,6 @@ const triggers = {
   sec4: false,
 }
 const triggerKeys = Object.keys(triggers)
-
 function setTrigger(rotationCos, rotationSin, targetName) {
   const cos = Math.round(rotationCos * 100)
   const sin = Math.round(rotationSin * 100)

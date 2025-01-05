@@ -6,5 +6,9 @@ body {
   color: #fff;
   background-color: #333;
   @include m.font_fjalla;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.10em;
+
+  @include m.pc {
+    @include m.fz_vw(16);
+  }
 }
