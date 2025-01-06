@@ -139,18 +139,18 @@ function rot() {
   meshes[1].position.z = -3 + 3.8 * rotation2Sin
   setTrigger(rotation2Cos, rotation2Sin, 'sec2')
 
-  const rotation3 = rotation + Math.PI
+  const rotation3 = rotation + 3 * (Math.PI / 2)
   const rotation3Cos = Math.cos(rotation3)
   const rotation3Sin = Math.sin(rotation3) 
-  meshes[2].position.x = 2 + 3.8 * Math.cos(rotation3)
-  meshes[2].position.z = -3 + 3.8 * Math.sin(rotation3)
+  meshes[3].position.x = 2 + 3.8 * Math.cos(rotation3)
+  meshes[3].position.z = -3 + 3.8 * Math.sin(rotation3)
   setTrigger(rotation3Cos, rotation3Sin, 'sec3')
 
-  const rotation4 = rotation + 3* (Math.PI / 2)
+  const rotation4 = rotation + Math.PI
   const rotation4Cos = Math.cos(rotation4)
   const rotation4Sin = Math.sin(rotation4) 
-  meshes[3].position.x = 2 + 3.8 * Math.cos(rotation4)
-  meshes[3].position.z = -3 + 3.8 * Math.sin(rotation4)
+  meshes[2].position.x = 2 + 3.8 * Math.cos(rotation4)
+  meshes[2].position.z = -3 + 3.8 * Math.sin(rotation4)
   setTrigger(rotation4Cos, rotation4Sin, 'sec4')
 
   window.requestAnimationFrame(rot)
