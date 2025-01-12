@@ -76,16 +76,6 @@ const createMesh = () => {
 
   scene.add(mesh1, mesh2, mesh3, mesh4)
   meshes.push(mesh1, mesh2, mesh3, mesh4)
-
-  // パーティクル
-  const particlesGeometry = new THREE.SphereGeometry(1, 16, 32)
-  const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.02,
-    sizeAttenuation: false,
-    color: '#ffffff'
-  })
-  const particles = new THREE.Points(particlesGeometry, particlesMaterial)
-  scene.add(particles)
 }
 
 // オブジェクト回転のトリガー
