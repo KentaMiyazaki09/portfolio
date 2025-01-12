@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 // import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
 import * as lil from 'lil-gui'
 
 /**
@@ -16,13 +17,13 @@ const sizes = {
   height: window.innerHeight
 }
 
-let scene, canvas, camera, renderer
+let directionalLight, scene, canvas, camera, renderer
 
 /**
  * ライト
  */
 const addLight = () => {
-  const directionalLight = new THREE.DirectionalLight(0xffffff)
+  directionalLight = new THREE.DirectionalLight(0xffffff)
   directionalLight.position.set(0.53, 0.56, 0.68)
   scene.add(directionalLight)
 
@@ -30,6 +31,8 @@ const addLight = () => {
   folderLight.add(directionalLight.position, 'x', -1, 1, 0.01)
   folderLight.add(directionalLight.position, 'y', -1, 1, 0.01)
   folderLight.add(directionalLight.position, 'z', -1, 1, 0.01)
+  // folderLight.add(directionalLight.color, 'color light')
+  gui.addColor(directionalLight, "color")
 }
 
 /**
@@ -51,7 +54,7 @@ const addCamera = () => {
 let meshes = []
 const createMesh = () => {
   const material = new THREE.MeshPhysicalMaterial({
-    color: '#1f80ff',
+    color: '#fff',
     metalness: 0.67,
     roughness: 0.43,
     flatShading: true,
@@ -75,20 +78,10 @@ const createMesh = () => {
   meshes.push(mesh1, mesh2, mesh3, mesh4)
 
   // パーティクル
-  const particlesGeometry = new THREE.BufferGeometry()
-  const particlesCount = 700
-  const positionArray = new Float32Array(particlesCount * 3)
-  for(let i = 0; i < particlesCount * 3; i++) {
-    positionArray[i] = (Math.random() - 0.5) * 10
-  }
-
-  particlesGeometry.setAttribute(
-    'position',
-    new THREE.BufferAttribute(positionArray, 3)
-  )
-
+  const particlesGeometry = new THREE.SphereGeometry(1, 16, 32)
   const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.025,
+    size: 0.02,
+    sizeAttenuation: false,
     color: '#ffffff'
   })
   const particles = new THREE.Points(particlesGeometry, particlesMaterial)
@@ -103,7 +96,7 @@ const triggers = {
   sec4: false,
 }
 const triggerKeys = Object.keys(triggers)
-function setTrigger(rotationCos, rotationSin, targetName) {
+function setTrigger(rotationCos, rotationSin, targetName, lightColor) {
   const cos = Math.round(rotationCos * 100)
   const sin = Math.round(rotationSin * 100)
   
@@ -116,6 +109,7 @@ function setTrigger(rotationCos, rotationSin, targetName) {
     }
 
     document.querySelector(`#${targetName}`).classList.add('is-active')
+    directionalLight.color.set(lightColor)
     triggers[targetName] = true
   }
 }
@@ -130,28 +124,28 @@ function rot() {
   const rotationSin = Math.sin(rotation)
   meshes[0].position.x = 2 + 3.8 * rotationCos
   meshes[0].position.z = -3 + 3.8 * rotationSin
-  setTrigger(rotationCos, rotationSin, 'sec1')
+  setTrigger(rotationCos, rotationSin, 'sec1', '#84c1ff')
 
   const rotation2 = rotation + Math.PI / 2
   const rotation2Cos = Math.cos(rotation2)
   const rotation2Sin = Math.sin(rotation2) 
   meshes[1].position.x = 2 + 3.8 * rotation2Cos
   meshes[1].position.z = -3 + 3.8 * rotation2Sin
-  setTrigger(rotation2Cos, rotation2Sin, 'sec2')
+  setTrigger(rotation2Cos, rotation2Sin, 'sec2', '#ffffff')
 
   const rotation3 = rotation + 3 * (Math.PI / 2)
   const rotation3Cos = Math.cos(rotation3)
   const rotation3Sin = Math.sin(rotation3) 
   meshes[3].position.x = 2 + 3.8 * Math.cos(rotation3)
   meshes[3].position.z = -3 + 3.8 * Math.sin(rotation3)
-  setTrigger(rotation3Cos, rotation3Sin, 'sec3')
+  setTrigger(rotation3Cos, rotation3Sin, 'sec3', '#ffff84')
 
   const rotation4 = rotation + Math.PI
   const rotation4Cos = Math.cos(rotation4)
   const rotation4Sin = Math.sin(rotation4) 
   meshes[2].position.x = 2 + 3.8 * Math.cos(rotation4)
   meshes[2].position.z = -3 + 3.8 * Math.sin(rotation4)
-  setTrigger(rotation4Cos, rotation4Sin, 'sec4')
+  setTrigger(rotation4Cos, rotation4Sin, 'sec4', '#ff8484')
 
   window.requestAnimationFrame(rot)
 }
